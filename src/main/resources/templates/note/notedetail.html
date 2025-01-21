@@ -19,6 +19,20 @@
 			<a class="btn btn-secondary" th:href="@{'/'}" th:text="#{button.back}">Back</a>
 		</p>
 		<div class="card card-info">
+			<th:block th:if="${note.isRecentCreated(7)}">
+				<div class="ribbon-wrapper ribbon-lg">
+					<div class="ribbon bg-pink">
+						New
+					</div>
+				</div>
+			</th:block>
+			<th:block th:if="${note.isRecentUpdated(7)}">
+				<div class="ribbon-wrapper">
+					<div class="ribbon bg-yellow">
+						Update
+					</div>
+				</div>
+			</th:block>
 			<div class="card-header">
 				<h3 th:text="${note.title}"></h3>
 				<div class="card-tools">

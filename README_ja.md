@@ -11,6 +11,7 @@
 - ビューは JSP ではなく Thymeleaf を利用しています。
 - プロダクトレベルではありません。バリデーション等はかなり手を抜いています。  
 - 画像ファイル等のアセットの登録はサポートしていません。
+- UIは日英対応。ブラウザの言語設定で切り替わります。
 
 ## System Requirement
 
@@ -59,3 +60,11 @@ mvn package
 ### id / password
 
 id = `admin`, password = `admin` でログイン可能です。ユーザ一覧画面からパスワード変更が可能です。
+
+## スクリーンショット
+
+![Create a Note](./img/mynote-edit.png)
+
+![Preview a Note](./img/mynote-preview.png)
+
+![Preview (mobile)](./img/mynote-preview-mobile.png)　![Show a Note (mobile)](./img/mynote-notedetail-mobile.png)

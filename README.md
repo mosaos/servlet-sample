@@ -4,13 +4,14 @@ Servlet sample application
 
 ## Overview
 
-This is a simple memo app.  
+This is an app for taking simple notes.  
 It supports Markdown format (only).
 
-- For learning Servlet.  
+- For **`learning Servlet`**.  
 - The view uses Thymeleaf instead of JSP.
 - Not at the product level. Validation etc. are quite sloppy.   
 - Registration of assets such as image files is not supported.
+- UI supports Japanese and English. The language can be changed using the browser's language settings.
 
 ## System Requirement
 
@@ -61,3 +62,11 @@ Deploy generated war file to Apache Tomcat.
 
 You can log in with id = `admin`, password = `admin`.  
 You can change the password from the user list screen.
+
+## Screenshots
+
+![Create a Note](./img/mynote-edit.png)
+
+![Preview a Note](./img/mynote-preview.png)
+
+![Preview (mobile)](./img/mynote-preview-mobile.png)　![Show a Note (mobile)](./img/mynote-notedetail-mobile.png)

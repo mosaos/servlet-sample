@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/layout.html">
+<head>
+	<title th:text="#{user.detail}">User Detail</title>
+</head>
+<div layout:fragment="content">
+	<div class="content-header with-border">
+		<h1 th:text="#{user.detail}">User Detail</h1>
+	</div>
+	<div class="content px-2">
+		<div class="card">
+			<div class="card-body">
+				<table class="table table-striped table-responsive-sm">
+					<tr>
+						<th th:text="#{user.userId}">UserID</th>
+						<td th:text="${user.userId}"></td>
+					</tr>
+					<tr>
+						<th th:text="#{user.name}">UserName</th>
+						<td th:text="${user.userName}"></td>
+					</tr>
+					<tr>
+						<th th:text="#{user.email}">Email</th>
+						<td th:text="${user.email}"></td>
+					</tr>
+					<tr>
+						<th th:text="#{user.admin}">Admin</th>
+						<td th:text="${user.isAdmin}"></td>
+					</tr>
+					<tr>
+						<th th:text="#{user.createdDate}">CreatedAt</th>
+						<td th:text="${user.createdAt}"></td>
+					</tr>
+					<tr>
+						<th th:text="#{user.updatedDate}">UpdatedAt</th>
+						<td th:text="${user.updatedAt}"></td>
+					</tr>
+				</table>
+			</div>
+			<div class="card-footer">
+				<th:block th:if="${#ctx.session.user != null} and ((${#ctx.session.user.id} == ${user.id}) or (${#ctx.session.user.isAdmin}))">
+				<a class="btn btn-primary" th:href="@{'/admin/users/edit/'} + ${user.uuid}" th:text="#{button.edit}"
+					id="user-edit">Edit</a>
+				</th:block>
+				<a class="btn btn-secondary" th:href="@{'/admin/users'}" th:text="#{button.back}">Back</a>
+			</div>
+		</div>
+	</div>
+	<!-- /.content -->
+</div>
+</html>

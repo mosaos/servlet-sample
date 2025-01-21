@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/layout.html">
+
+<head>
+	<title th:text="#{user.profile}">User Profile</title>
+</head>
+<div layout:fragment="content">
+	<div class="content-header with-border">
+		<h1 th:text="#{user.profile}">Profile</h1>
+	</div>
+	<div class="content px-2">
+		<div class="card">
+			<div class="card-body">
+			<table class="table table-striped table-responsive-sm">
+				<tr>
+					<th th:text="#{user.userId}">UserID</th>
+					<td th:text="${user.userId}"></td>
+				</tr>
+				<tr>
+					<th th:text="#{user.name}">UserName</th>
+					<td th:text="${user.userName}"></td>
+				</tr>
+				<tr>
+					<th th:text="#{user.email}">Email</th>
+					<td th:text="${user.email}"></td>
+				</tr>
+				<tr>
+					<th th:text="#{user.admin}">Admin</th>
+					<td th:text="${user.isAdmin}"></td>
+				</tr>
+				<tr>
+					<th th:text="#{user.createdDate}">CreatedAt</th>
+					<td th:text="${user.createdAt}"></td>
+				</tr>
+				<tr>
+					<th th:text="#{user.updatedDate}">UpdatedAt</th>
+					<td th:text="${user.updatedAt}"></td>
+				</tr>
+			</table>
+			</div>
+		</div>
+	</div>
+	<!-- /.content -->
+
+</div>
+
+</html>

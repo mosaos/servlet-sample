@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/layout.html">
+
+<head>
+	<title th:text="#{note.detail}">Note Detail</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/sunburst.min.css">
+</head>
+<div layout:fragment="content">
+	<div class="content-header with-border">
+		<h1 th:text="#{note.detail}">Note Detail</h1>
+	</div>
+	<div class="content px-2">
+		<p>
+			<th:block th:if="${#ctx.session.user != null} and (${#ctx.session.user.id} == ${note.userId})">
+				<a class="btn btn-primary" th:href="@{'/notes/edit/'} + ${note.uuid}" th:text="#{button.edit}"
+					id="user-edit">Edit</a>
+			</th:block>
+			<a class="btn btn-secondary" th:href="@{'/'}" th:text="#{button.back}">Back</a>
+		</p>
+		<div class="card card-info">
+			<div class="card-header">
+				<h3 th:text="${note.title}"></h3>
+				<div class="card-tools">
+					<i class="nav-icon fas fa-user" data-toggle="tooltip" data-placement="left" title="Author"></i>
+					<span th:text="${note.user.userName}"></span><br>
+					<i class="nav-icon fas fa-edit" data-toggle="tooltip" data-placement="left" title="Updated At"></i>
+					<span
+						th:text="${#temporals.format(note.updatedAt.toLocalDateTime(), 'yyyy/MM/dd HH:mm')}"></span><br>
+					<i class="nav-icon fas fa-pen" data-toggle="tooltip" data-placement="left" title="Created At"></i>
+					<span
+						th:text="${#temporals.format(note.createdAt.toLocalDateTime(), 'yyyy/MM/dd HH:mm')}"></span><br>
+				</div>
+				<div><i class="nav-icon fas fa-tags" data-toggle="tooltip" data-placement="left" title="Tags"></i>
+					<th:block th:each="tag : ${note.tagList}">
+						<a th:href="@{/notes/search(tag=${tag})}" th:text="'#' + ${tag}"
+							style="text-decoration: underline;"></a>
+					</th:block>
+				</div>
+			</div>
+			<div class="card-body">
+				<p th:attr="data-content=${note.content}" class="markdown-content"></p>
+			</div>
+
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/15.0.6/marked.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+	<script th:src="@{/js/myapp.js}"></script>
+	<script>
+		replaceMarkdownToHtml();
+	</script>
+</div>
+<!-- /.content -->
+
+</html>

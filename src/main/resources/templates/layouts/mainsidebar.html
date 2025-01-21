@@ -1,0 +1,41 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<aside th:fragment="sidebar" class="main-sidebar sidebar-dark-primary elevation-4">
+	<!-- Site Title -->
+	<a th:href="@{/}" class="brand-link">
+		<span class="brand-text font-weight-light" th:text="#{site.title}">Title</span>
+	</a>
+
+	<!-- Sidebar -->
+	<div class="sidebar">
+		<!-- Sidebar Menu -->
+		<nav class="mt-2">
+			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+				<!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+				<li class="nav-item">
+					<a th:href="@{/}" class="nav-link">
+						<i class="nav-icon fas fa-home"></i>
+						<span th:text="#{menu.home}">Home</span>
+					</a>
+				</li>
+				<li class="nav-header">ADMIN</li>
+				<li class="nav-item">
+					<a th:href="@{/admin/users}" class="nav-link">
+						<i class="nav-icon fas fa-user"></i>
+						<span th:text="#{menu.users}">User</span>
+					</a>
+				</li>
+				<li class="nav-header">MISCELLANEOUS</li>
+				<li class="nav-item">
+					<a href="https://adminlte.io/docs/3.2/" class="nav-link">
+						<i class="nav-icon fas fa-file"></i>
+						<span>AdminLTE Docs.</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<!-- /.sidebar-menu -->
+	</div>
+	<!-- /.sidebar -->
+</aside>
+</html>

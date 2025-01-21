@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/layout.html">
+
+<head>
+	<title th:text="#{note.list}">Note List</title>
+</head>
+<div layout:fragment="content">
+	<div class="content-header with-border">
+		<h1 th:text="#{note.list}">Note List</h1>
+	</div>
+	<div class="content px-2">
+		<div class="card">
+			<div class="card-body">
+				<table class="table table-striped table-responsive-sm">
+					<thead>
+						<tr>
+							<th th:text="#{note.title}">Title</th>
+							<th th:text="#{note.content}">Content</th>
+							<th th:text="#{note.title}">Author</th>
+							<th th:text="#{note.createdDate}">CreatedAt</th>
+							<th th:text="#{note.updatedDate}">UpdatedAt</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="row : ${list}">
+							<td th:text="${row.title}"></td>
+							<td th:text="${row.content}"></td>
+							<td th:text="${row.author}"></td>
+							<td th:text="${row.createdAt}"></td>
+							<td th:text="${row.updatedAt}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer clearfix">
+				<ul class="pagination pagination-sm no-margin pull-right">
+					<li class="paginate_button page-item previous"><a class="page-link"
+							th:href="@{/admin/users?p=1}">First</a>
+					</li>
+					<li class="paginate_button page-item" th:classappend="${p == currentIndex}? ' active' : ''"
+						th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}">
+						<a class="page-link" th:href="@{/admin/users?p={page}(page=${p})}" th:text="${p}"></a>
+					</li>
+					<li class="paginate_button page-item previous"><a class="page-link"
+							th:href="@{/admin/users?p={end}(end=${endIndex})}">Last</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- /.content -->
+</div>
+
+</html>

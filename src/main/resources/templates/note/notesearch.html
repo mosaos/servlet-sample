@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/layout.html">
+
+<head>
+	<title th:text="#{note.search}">Search Note</title>
+</head>
+<div layout:fragment="content">
+	<div class="content-header">
+		<h1 th:text="#{note.search}">Search Note</h1>
+	</div>
+	<div class="content px-2">
+		<div>
+			<form data-toggle="validator" role="form" th:object="${note}" th:action="@{/notes/search}" method="GET">
+				<div class="form-group">
+					<div class="input-group input-group-lg">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-pen" data-toggle="tooltip"
+									data-placement="left" title="Keywords"></i></span>
+						</div>
+						<input type="search" name="q" class="form-control form-control-lg"
+							placeholder="Type your keywords here" th:value="${q}">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-tags" data-toggle="tooltip"
+									data-placement="left" title="Tags"></i></span>
+						</div>
+						<input type="search" name="tag" class="form-control form-control-sm" placeholder="Type tag here"
+							th:value="${tag}">
+						<div class="input-group-append">
+							<button type="submit" class="btn btn-lg btn-default">
+								<i class="fa fa-search" data-toggle="tooltip" data-placement="left" title="Search"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<th:block th:if="${list.isEmpty()}">
+			<p class="" th:text="#{search.noresults}"></p>
+		</th:block>
+		<div class="quote-info mt-0" th:each="row : ${list}">
+			<div class="card card-info">
+				<th:block th:if="${row.isRecentCreated(7)}">
+					<div class="ribbon-wrapper ribbon-lg">
+						<div class="ribbon bg-pink">
+							New
+						</div>
+					</div>
+				</th:block>
+				<th:block th:if="${row.isRecentUpdated(7)}">
+					<div class="ribbon-wrapper">
+						<div class="ribbon bg-yellow">
+							Update
+						</div>
+					</div>
+				</th:block>
+				<div class="card-header">
+					<h3><a th:href="@{'/notes/'} + ${row.uuid}" th:text="${row.title}"
+							style="text-decoration: underline;"></a></h3>
+					<div><i class="nav-icon fas fa-tags" data-toggle="tooltip" data-placement="left" title="Tags"></i>
+						<th:block th:each="tag : ${row.tagList}">
+							<a th:href="@{/notes/search(tag=${tag})}" th:text="'#' + ${tag}"
+								style="text-decoration: underline;"></a>
+						</th:block>
+					</div>
+				</div>
+				<div class="card-body">
+					<p th:attr="data-content=${row.content}" class="markdown-content search-result"
+						style="font-size: 80%;"></p>
+				</div>
+				<div class="card-footer">
+					<div class="card-tools">
+						<i class="nav-icon fas fa-user" data-toggle="tooltip" data-placement="left" title="Author"></i>
+						<span th:text="${row.user.userName}"></span>
+						<i class="nav-icon fas fa-edit" data-toggle="tooltip" data-placement="left"
+							title="Updated At"></i> <span
+							th:text="${#temporals.format(row.updatedAt.toLocalDateTime(), 'yyyy/MM/dd HH:mm')}"></span>
+						<i class="nav-icon fas fa-pen" data-toggle="tooltip" data-placement="left"
+							title="Created At"></i> <span
+							th:text="${#temporals.format(row.createdAt.toLocalDateTime(), 'yyyy/MM/dd HH:mm')}"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card-footer clearfix">
+			<ul class="pagination pagination-sm no-margin pull-right">
+				<li class="paginate_button page-item previous"><a class="page-link"
+						th:href="@{/notes/search(q=${q},p=1)}">First</a>
+				</li>
+				<li class="paginate_button page-item" th:classappend="${p == currentIndex}? ' active' : ''"
+					th:each="p : ${#numbers.sequence(1, endIndex/beginIndex)}">
+					<a class="page-link" th:href="@{/notes/search(q=${q},p=${p})}" th:text="${p}"></a>
+				</li>
+				<li class="paginate_button page-item previous"><a class="page-link"
+						th:href="@{/notes/search(q=${q},p=${endIndex})}">Last</a></li>
+			</ul>
+		</div>
+
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+	<script th:src="@{/js/myapp.js}"></script>
+	<script>
+		highlightKeyword();
+		replaceMarkdownToHtml();
+	</script>
+</div>
+<!-- /.content -->
+
+</html>

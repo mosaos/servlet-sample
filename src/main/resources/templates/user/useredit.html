@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layouts/layout.html">
+
+<head>
+	<title th:text="#{user.edit}">User Edit</title>
+</head>
+<div layout:fragment="content">
+	<div class="content-header with-border">
+		<h1 th:text="#{user.edit}">User Edit</h1>
+	</div>
+	<div class="content px-2">
+		<form data-toggle="validator" role="form" th:object="${user}" th:action="@{/admin/users/edit/} + ${user.uuid}"
+			method="POST">
+			<div class="card">
+				<div class="card-body">
+					<p style="color: red;" th:text="${errorMessage}"></p>
+					<div class="form-group">
+						<label for="userId" th:text="#{user.userId}">User ID</label>
+						<input type="text" name="userId" readonly class="form-control" th:value="*{userId}"
+							id="userId" />
+					</div>
+					<div class="form-group">
+						<label for="userName" th:text="#{user.name}">User Name</label>
+						<input type="text" name="userName" required class="form-control" th:value="*{userName}"
+							id="userName" />
+					</div>
+					<div class="form-group">
+						<label for="password" th:text="#{user.password}">Password</label>
+						<input type="password" name="password" class="form-control" id="password" />
+					</div>
+					<div class="form-group">
+						<label for="password2" th:text="#{user.password2}">Password (Confirm)</label>
+						<input type="password" name="password2" class="form-control" id="password2" />
+					</div>
+					<div class="form-group">
+						<label for="email" th:text="#{user.email}">E-mail</label>
+						<input type="text" name="email" required class="form-control" th:value="*{email}" id="email" />
+					</div>
+					<div class="form-group">
+						<label for="admin" th:text="#{user.admin}">Admin</label>
+						<th:block th:if="${#ctx.session.user != null} and (${#ctx.session.user.isAdmin})">
+							<div class="form-check col-sm-10">
+								<input type="checkbox" name="isAdmin" class="form-check-input" value="true"
+									th:checked="*{isAdmin}" id="admin" />
+							</div>
+						</th:block>
+						<th:block th:if="${#ctx.session.user == null} or (${#ctx.session.user.isAdmin == false})">
+							<input type="text" name="isAdmin" readonly class="form-control" th:value="*{isAdmin}"
+								id="admin" />
+						</th:block>
+					</div>
+				</div>
+				<div class="card-footer">
+					<button class="btn btn-primary" type="submit" th:text="#{button.edit}" id="user-edit">Edit</button>
+					<input type="reset" class="btn btn-secondary" th:value="#{button.reset}">
+					<button type="button" onclick="history.back()" class="btn btn-secondary"
+						th:text="#{button.back}">Back</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- /.content -->
+</div>
+
+</html>

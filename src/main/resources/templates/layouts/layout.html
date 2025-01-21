@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Google Font: Source Sans Pro -->
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+	<!-- Font Awesome Icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/css/adminlte.min.css">
+
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body class="hold-transition sidebar-mini">
+	<div class="wrapper">
+		<!--/* PAGE HEADER AREA */-->
+		<div th:replace="~{layouts/header :: header}"></div>
+
+		<!--/* MAIN SIDEBAR AREA */-->
+		<div th:replace="~{layouts/mainsidebar :: sidebar}"></div>
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-12">
+							<!--/* CONTENT AREA */-->
+							<div layout:fragment="content"></div>
+						</div>
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.container-fluid -->
+			</div>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+
+		<!-- PAGE FOOTER AREA -->
+		<div th:replace="~{layouts/footer :: footer}"></div>
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- REQUIRED SCRIPTS -->
+	<!-- jQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.bundle.min.js"></script>
+	<!-- AdminLTE -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js"></script>
+
+	<!-- OPTIONAL SCRIPTS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="https://adminlte.io/themes/v3/dist/js/demo.js"></script>
+	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/pages/dashboard3.min.js"></script>
+</body>
+
+</html>

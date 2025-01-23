@@ -10,15 +10,15 @@
 
 	<filter>
 		<filter-name>SetWebContextLocaleFilter</filter-name>
-		<filter-class>mosaos.filter.SetWebContextLocaleFilter</filter-class>
+		<filter-class>mosaos.servlet_sample.filter.SetWebContextLocaleFilter</filter-class>
 	</filter>
 	<!--<filter> -->
 	<!-- <filter-name>LoggingFilter</filter-name> -->
-	<!-- <filter-class>mosaos.filter.LoggingFilter</filter-class> -->
+	<!-- <filter-class>mosaos.servlet_sample.filter.LoggingFilter</filter-class> -->
 	<!--</filter> -->
 	<filter>
 		<filter-name>LoginCheckFilter</filter-name>
-		<filter-class>mosaos.filter.LoginCheckFilter</filter-class>
+		<filter-class>mosaos.servlet_sample.filter.LoginCheckFilter</filter-class>
 	</filter>
 
 	<filter-mapping>

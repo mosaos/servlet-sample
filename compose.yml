@@ -1,14 +1,13 @@
 services:
   mynote:
-    image: mynote-app
     build: .
     container_name: mynote
     hostname: mynote
     restart: always
     depends_on:
-      - mariadb
-      # mariadb:
-      #   condition: service_healthy
+      # - mariadb
+      mariadb:
+        condition: service_healthy
     environment:
       - APP_JDBC_URL=jdbc:mySQL://mariadb/mynote
       - APP_JDBC_USER=mynote
@@ -38,8 +37,8 @@ services:
       - MARIADB_PASSWORD=mynotepass
     ports:
       - 3306:3306
-    # healthcheck:
-    #   test: ["CMD", "mariadb", "-h", "localhost", "-u", "mynote", "-pmynotepass", "-e", "SELECT 1;"]
-    #   interval: 10s
-    #   retries: 5
-    #   timeout: 5s
+    healthcheck:
+      test: ["CMD", "mariadb", "-h", "localhost", "-u", "mynote", "-pmynotepass", "-e", "SELECT 1;"]
+      interval: 10s
+      retries: 5
+      timeout: 5s

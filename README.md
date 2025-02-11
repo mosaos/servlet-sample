@@ -75,7 +75,7 @@ You can change the password from the user list screen.
 
 You can use docker compose.
 
-Run the following in project root:
+Run the following in project root.
 
 ```shell
 docker compose up -d

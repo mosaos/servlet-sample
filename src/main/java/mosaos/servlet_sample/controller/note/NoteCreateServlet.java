@@ -70,7 +70,7 @@ public class NoteCreateServlet extends HttpServlet {
         int count = noteService.create(note);
         if (count > 0) {
             log.info("{} note crated by {}", note.getTitle(), PermissionUtil.getCurrentUser(req).getUserId());
-            resp.sendRedirect(req.getContextPath());
+            resp.sendRedirect(req.getContextPath() + "/");
         } else {
             templateEngine.process("note/notecreate", context, resp.getWriter());
         }

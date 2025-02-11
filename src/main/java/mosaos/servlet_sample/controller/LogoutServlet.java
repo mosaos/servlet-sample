@@ -21,6 +21,6 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
         }
         resp.setContentType("text/html;charset=UTF-8");
-        resp.sendRedirect(req.getContextPath());
+        resp.sendRedirect(req.getContextPath() + "/");
     }
 }

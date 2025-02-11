@@ -79,7 +79,7 @@ public class NoteEditServlet extends HttpServlet {
         log.debug("{} notes edited.", count);
 
         if (count > 0) {
-            resp.sendRedirect(req.getContextPath());
+            resp.sendRedirect(req.getContextPath() + "/");
         } else {
             templateEngine.process("note/notecreate", context, resp.getWriter());
         }

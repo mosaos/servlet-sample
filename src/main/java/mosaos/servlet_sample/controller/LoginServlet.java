@@ -63,7 +63,7 @@ public class LoginServlet extends HttpServlet {
                 session.removeAttribute("originalUrl");
                 resp.sendRedirect(originalUrl);
             } else {
-                resp.sendRedirect(req.getContextPath());
+                resp.sendRedirect(req.getContextPath() + "/");
             }
         } else {
             context.setVariable("errorMessage", MessageUtil.getMessage("login.fail", req.getLocale()));

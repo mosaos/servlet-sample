@@ -1,0 +1,45 @@
+services:
+  mynote:
+    image: mynote-app
+    build: .
+    container_name: mynote
+    hostname: mynote
+    restart: always
+    depends_on:
+      - mariadb
+      # mariadb:
+      #   condition: service_healthy
+    environment:
+      - APP_JDBC_URL=jdbc:mySQL://mariadb/mynote
+      - APP_JDBC_USER=mynote
+      - APP_JDBC_PASSWORD=mynotepass
+      - JAVA_OPTS=-Dlog4j2.formatMsgNoLookups=true
+    volumes:
+      - ./log/tomcat:/usr/local/tomcat/logs
+    ports:
+      - 8080:8080
+    tty: true
+
+  mariadb:
+    build: ./docker/mariadb
+    image: mariadb
+    container_name: mariadb
+    hostname: mariadb
+    #    network_mode: host
+    volumes:
+      - ./mysql/:/var/lib/mysql/
+      - ./docker/mariadb/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/mariadb/conf.d:/etc/mysql/conf.d
+      - ./log/mariadb:/var/log/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=changethis
+      - MARIADB_DATABASE=mynote
+      - MARIADB_USER=mynote
+      - MARIADB_PASSWORD=mynotepass
+    ports:
+      - 3306:3306
+    # healthcheck:
+    #   test: ["CMD", "mariadb", "-h", "localhost", "-u", "mynote", "-pmynotepass", "-e", "SELECT 1;"]
+    #   interval: 10s
+    #   retries: 5
+    #   timeout: 5s

@@ -39,7 +39,7 @@ public class ErrorServlet extends HttpServlet {
         logException(exception);
 
         req.setAttribute("statusCode", statusCode);
-        if (message == null || message.isEmpty()) {
+        if ((message == null || message.isEmpty()) && exception != null) {
             message = exception.getLocalizedMessage();
         }
         req.setAttribute("message", message);

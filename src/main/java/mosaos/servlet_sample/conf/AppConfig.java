@@ -28,30 +28,41 @@ public class AppConfig {
     }
 
     public static String getProperty(String key) {
-        return props.getProperty(key);
+        return getEnvOrProperty(key);
     }
     public static String getJdbcDriver() {
-        return props.getProperty("jdbc.driver");
+        return getEnvOrProperty("jdbc.driver");
     }
     public static String getJdbcUrl() {
-        return props.getProperty("jdbc.url");
+        String value = getEnvOrProperty("jdbc.url");
+        log.info("🌟JDBC_URL  : " + value);
+        return value;
     }
     public static String getJdbcUser() {
-        return props.getProperty("jdbc.user");
+        String value = getEnvOrProperty("jdbc.user");
+        log.info("🌟JDBC_USER : " + value);
+        return getEnvOrProperty("jdbc.user");
     }
     public static String getJdbcPassword() {
-        return props.getProperty("jdbc.password");
+        return getEnvOrProperty("jdbc.password");
     }
     public static Locale getDefaultLocale() {
-        String value = props.getProperty("locale.default");
+        String value = getEnvOrProperty("locale.default");
         return Locale.forLanguageTag(value);
     }
     public static boolean isThymeleafCache() {
-        String value = props.getProperty("thymeleaf.cache");
+        String value = getEnvOrProperty("thymeleaf.cache");
         return Boolean.getBoolean(value);
     }
     public static int getTomcatPort() {
-        String value = props.getProperty("tomcat.port");
+        String value = getEnvOrProperty("tomcat.port");
         return Integer.getInteger(value);
+    }
+    private static String getEnvOrProperty(final String propKey) {
+        String envValue = System.getenv(getEnvKey(propKey));
+        return (envValue != null) ? envValue : props.getProperty(propKey);
+    }
+    private static String getEnvKey(final String key) {
+        return "APP_" + key.replaceAll("\\.", "_").toUpperCase();
     }
 }

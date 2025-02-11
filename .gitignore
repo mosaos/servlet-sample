@@ -36,3 +36,7 @@ build
 
 # VSCode
 .vscode
+
+# project specific ( docker compose )
+log
+mysql

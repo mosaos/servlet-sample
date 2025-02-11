@@ -70,3 +70,13 @@ You can change the password from the user list screen.
 ![Preview a Note](./img/mynote-preview.png)
 
 ![Preview (mobile)](./img/mynote-preview-mobile.png)　![Show a Note (mobile)](./img/mynote-notedetail-mobile.png)
+
+## Docker / docker compose
+
+You can use docker compose.
+
+Run the following in project root:
+
+```shell
+docker compose up -d
+````

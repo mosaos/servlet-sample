@@ -68,3 +68,13 @@ id = `admin`, password = `admin` でログイン可能です。ユーザ一覧�
 ![Preview a Note](./img/mynote-preview.png)
 
 ![Preview (mobile)](./img/mynote-preview-mobile.png)　![Show a Note (mobile)](./img/mynote-notedetail-mobile.png)
+
+## Docker / docker compose
+
+docker compose を使用できます。
+
+プロジェクトのルートで以下を実行してください。
+
+```shell
+docker compose up -d
+````

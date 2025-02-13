@@ -55,7 +55,6 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = req.getSession(true);
             session.setAttribute("user", user);
-            session.setMaxInactiveInterval(30); // 30 min.
 
             // Redirect to access destination, if via LoginCheckFilter
             String originalUrl = req.getParameter("originalUrl");
